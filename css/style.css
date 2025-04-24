@@ -14,7 +14,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
     width: 100%; 
 }
 
@@ -46,7 +46,17 @@ nav a:hover {
     color: white;
     width: 100%; 
 }
-#produtos {
+#legenda {
+    text-align: center;
+    font-size: 25px
+}
+#produtosContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 30px;
+}
+#bebidasContainer {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
