@@ -4,8 +4,12 @@
     box-sizing: border-box;
 }
 body {
-    background-color: aliceblue;
+    background-image: url('img/fundo.jpg'); /* Caminho da imagem */
+    background-size: cover; /* A imagem vai cobrir toda a tela */
+    background-position: center; /* A imagem vai ficar centralizada */
+    background-repeat: no-repeat; /* A imagem não vai se repetir */
 }
+
 
 #header {
     background-color: blueviolet;
@@ -103,6 +107,48 @@ nav a:hover {
     margin-left: 20px;
     white-space: nowrap;
 }
+.quantidade {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.quantidade button {
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.quantidade button:hover {
+    background-color: darkviolet;
+}
+
+#botao-carrinho {
+    background-color: green;
+    color: white;
+    border: none;
+    width: 90%; /* Agora ele vai ocupar 90% da largura */
+    max-width: 400px; /* Vai ter uma largura máxima pra não esticar demais em telas grandes */
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 30px auto; /* Vai centralizar ele e deixar espaço nas laterais */
+    border-radius: 25px; /* Borda arredondada */
+    display: block; /* Faz o botão ser um bloco, ocupando o espaço que definimos */
+    transition: background-color 0.3s ease;
+}
+
+#botao-carrinho:hover {
+    background-color: darkgreen;
+}
+
 
 
 #final {

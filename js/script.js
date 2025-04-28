@@ -22,9 +22,9 @@ const bebidas = [
 
 function exibirProdutos(lista) {
     const container = document.getElementById("produtosContainer");
-    container.innerHTML = ""; 
+    container.innerHTML = "";
 
-    lista.forEach(item => {
+    lista.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "card";
 
@@ -33,6 +33,11 @@ function exibirProdutos(lista) {
             <div class="card-info">
                 <h3>${item.nome}</h3>
                 <p>${item.ingredientes}</p>
+                <div class="quantidade">
+                    <button onclick="alterarQuantidade('produtos', ${index}, -1)">-</button>
+                    <span id="quantidade-produtos-${index}">0</span>
+                    <button onclick="alterarQuantidade('produtos', ${index}, 1)">+</button>
+                </div>
             </div>
             <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
         `;
@@ -40,11 +45,12 @@ function exibirProdutos(lista) {
         container.appendChild(card);
     });
 }
+
 function exibirBebidas(lista) {
     const container = document.getElementById("bebidasContainer");
-    container.innerHTML = ""; 
+    container.innerHTML = "";
 
-    lista.forEach(item => {
+    lista.forEach((item, index) => {
         const card = document.createElement("div");
         card.className = "card";
 
@@ -53,6 +59,11 @@ function exibirBebidas(lista) {
             <div class="card-info">
                 <h3>${item.nome}</h3>
                 <p>${item.ml} ml</p>
+                <div class="quantidade">
+                    <button onclick="alterarQuantidade('bebidas', ${index}, -1)">-</button>
+                    <span id="quantidade-bebidas-${index}">0</span>
+                    <button onclick="alterarQuantidade('bebidas', ${index}, 1)">+</button>
+                </div>
             </div>
             <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
         `;
@@ -61,7 +72,33 @@ function exibirBebidas(lista) {
     });
 }
 
+// Função pra alterar a quantidade
+function alterarQuantidade(tipo, index, valor) {
+    const id = `quantidade-${tipo}-${index}`;
+    const span = document.getElementById(id);
+    let quantidadeAtual = parseInt(span.innerText);
+
+    quantidadeAtual += valor;
+    if (quantidadeAtual < 0) quantidadeAtual = 0;
+
+    span.innerText = quantidadeAtual;
+}
+
 window.onload = () => {
     exibirProdutos(produtos);
-    exibirBebidas(bebidas)
+    exibirBebidas(bebidas);
+    adicionarBotaoCarrinho();
 };
+
+// Função pra adicionar o botão de carrinho
+function adicionarBotaoCarrinho() {
+    const main = document.querySelector('main');
+    const botao = document.createElement('button');
+    botao.id = "botao-carrinho";
+    botao.innerText = "Ir para o Carrinho";
+    botao.onclick = () => {
+        window.location.href = "carrinho.html"; // Aqui vc pode mudar a URL depois se quiser
+    };
+    main.appendChild(botao);
+}
+
