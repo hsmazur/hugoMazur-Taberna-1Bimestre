@@ -4,10 +4,8 @@
     box-sizing: border-box;
 }
 body {
-    background-image: url('img/fundo.jpg'); /* Caminho da imagem */
-    background-size: cover; /* A imagem vai cobrir toda a tela */
-    background-position: center; /* A imagem vai ficar centralizada */
-    background-repeat: no-repeat; /* A imagem não vai se repetir */
+    background-color: aliceblue;
+
 }
 
 
