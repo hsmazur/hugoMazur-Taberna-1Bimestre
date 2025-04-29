@@ -12,93 +12,68 @@ const produtos = [
     new Lanche("img/lanche11.png", "Burger do Arqueiro", "Pão rústico, hambúrguer de frango grelhado, folhas frescas da floresta, queijo de cabra", 27.90),
     new Lanche("img/lanche12.png", "Burger do Necromante", "Pão escuro, hambúrguer duplo, cebola roxa em conserva, molho escuro de alho", 26.40)
 ];
+
 const bebidas = [
     new Bebida("img/bebida1.png", "Hidromel do Rei", 500, 14.90),
     new Bebida("img/bebida2.png", "Poção de Energia", 300, 9.50),
     new Bebida("img/bebida3.png", "Cerveja Anã", 600, 12.00),
     new Bebida("img/bebida4.png", "Água Sagrada", 350, 6.00),
-    new Bebida("img/bebida5.png", "Suco da Floresta", 400, 10.00), 
-]
+    new Bebida("img/bebida5.png", "Suco da Floresta", 400, 10.00),
+];
 
-function exibirProdutos(lista) {
-    const container = document.getElementById("produtosContainer");
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
+
+function criarCard(item) {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+    <img src="${item.imagem}" alt="${item.nome}">
+    <div class="card-info">
+        <h3>${item.nome}</h3>
+        <p>${item.ingredientes || item.ml + " ml"}</p>
+        <div class="quantidade">
+            <button class="btn-menos">-</button>
+            <span class="contador">${carrinho[item.nome] || 0}</span>
+            <button class="btn-mais">+</button>
+        </div>
+    </div>
+    <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
+`;
+
+    const btnMais = card.querySelector(".btn-mais");
+    const btnMenos = card.querySelector(".btn-menos");
+    const contador = card.querySelector(".contador");
+
+    btnMais.addEventListener("click", () => {
+        carrinho[item.nome] = (carrinho[item.nome] || 0) + 1;
+        contador.textContent = carrinho[item.nome];
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+    });
+
+    btnMenos.addEventListener("click", () => {
+        if (carrinho[item.nome] > 0) {
+            carrinho[item.nome]--;
+            contador.textContent = carrinho[item.nome];
+            localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        }
+    });
+
+    return card;
+}
+
+function exibirProdutos(lista, containerId) {
+    const container = document.getElementById(containerId);
     container.innerHTML = "";
-
-    lista.forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        card.innerHTML = `
-            <img src="${item.imagem}" alt="${item.nome}">
-            <div class="card-info">
-                <h3>${item.nome}</h3>
-                <p>${item.ingredientes}</p>
-                <div class="quantidade">
-                    <button onclick="alterarQuantidade('produtos', ${index}, -1)">-</button>
-                    <span id="quantidade-produtos-${index}">0</span>
-                    <button onclick="alterarQuantidade('produtos', ${index}, 1)">+</button>
-                </div>
-            </div>
-            <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
-        `;
-
+    lista.forEach(item => {
+        const card = criarCard(item);
         container.appendChild(card);
     });
 }
 
-function exibirBebidas(lista) {
-    const container = document.getElementById("bebidasContainer");
-    container.innerHTML = "";
-
-    lista.forEach((item, index) => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        card.innerHTML = `
-            <img src="${item.imagem}" alt="${item.nome}">
-            <div class="card-info">
-                <h3>${item.nome}</h3>
-                <p>${item.ml} ml</p>
-                <div class="quantidade">
-                    <button onclick="alterarQuantidade('bebidas', ${index}, -1)">-</button>
-                    <span id="quantidade-bebidas-${index}">0</span>
-                    <button onclick="alterarQuantidade('bebidas', ${index}, 1)">+</button>
-                </div>
-            </div>
-            <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
-        `;
-
-        container.appendChild(card);
-    });
-}
-
-// Função pra alterar a quantidade
-function alterarQuantidade(tipo, index, valor) {
-    const id = `quantidade-${tipo}-${index}`;
-    const span = document.getElementById(id);
-    let quantidadeAtual = parseInt(span.innerText);
-
-    quantidadeAtual += valor;
-    if (quantidadeAtual < 0) quantidadeAtual = 0;
-
-    span.innerText = quantidadeAtual;
-}
 
 window.onload = () => {
-    exibirProdutos(produtos);
-    exibirBebidas(bebidas);
-    adicionarBotaoCarrinho();
+    exibirProdutos(produtos, "produtosContainer");
+    exibirProdutos(bebidas, "bebidasContainer");
+    criarBotaoCarrinho();
 };
-
-// Função pra adicionar o botão de carrinho
-function adicionarBotaoCarrinho() {
-    const main = document.querySelector('main');
-    const botao = document.createElement('button');
-    botao.id = "botao-carrinho";
-    botao.innerText = "Ir para o Carrinho";
-    botao.onclick = () => {
-        window.location.href = "carrinho.html"; // Aqui vc pode mudar a URL depois se quiser
-    };
-    main.appendChild(botao);
-}
-
