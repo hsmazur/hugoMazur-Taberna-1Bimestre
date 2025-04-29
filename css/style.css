@@ -106,11 +106,12 @@ nav a:hover {
     white-space: nowrap;
 }
 .quantidade {
+    margin-top: 8px;
     display: flex;
     align-items: center;
-    margin-top: 10px;
-    gap: 10px;
+    gap: 8px;
 }
+
 
 .quantidade button {
     background-color: blueviolet;
@@ -127,27 +128,44 @@ nav a:hover {
     background-color: darkviolet;
 }
 
-#botao-carrinho {
-    background-color: green;
+.btn-mais,
+.btn-menos {
+    background-color: #6a5acd;
     color: white;
     border: none;
-    width: 90%; /* Agora ele vai ocupar 90% da largura */
-    max-width: 400px; /* Vai ter uma largura máxima pra não esticar demais em telas grandes */
-    padding: 15px;
-    font-size: 20px;
-    font-weight: bold;
+    padding: 4px 10px;
+    font-size: 16px;
+    border-radius: 6px;
     cursor: pointer;
-    margin: 30px auto; /* Vai centralizar ele e deixar espaço nas laterais */
-    border-radius: 25px; /* Borda arredondada */
-    display: block; /* Faz o botão ser um bloco, ocupando o espaço que definimos */
+}
+
+.contador {
+    font-weight: bold;
+    font-size: 16px;
+}
+.botao-carrinho-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 20px 20px 0 20px;
+}
+
+.botao-carrinho {
+    background-color: green;
+    color: white;
+    padding: 15px 30px;
+    font-size: 20px;
+    border: none;
+    border-radius: 15px;
+    text-decoration: none;
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
-#botao-carrinho:hover {
+.botao-carrinho:hover {
     background-color: darkgreen;
 }
-
-
 
 #final {
     background-color: blueviolet;
