@@ -27,12 +27,32 @@
         <div id="legenda">Carrinho</div>
         <section id="lista-carrinho"></section>
         <div id="lista-carrinho"></div>
-        <div id="total-carrinho"></div>
         <div id="opcoes-entrega">
             <button class="btn-entrega">Entrega</button>
             <button class="btn-retirada">Retirada</button>
         </div>
-        
+        <div id="formulario-entrega" style="display: none;"></div>
+        <div id="resumo-pedido" style="display: none;">
+            <div id="dados-usuario">
+                <h3>Dados do Usuário</h3>
+                <p id="nome-usuario"></p>
+                <p id="telefone-usuario"></p>
+                <p id="endereco-usuario"></p>
+                <p id="bairro-usuario"></p>
+            </div>
+            <div id="detalhes-pedido">
+                <h3>Detalhes do Pedido</h3>
+                <div id="itens-pedido"></div>
+                <p id="modo-entrega"></p>
+                <p id="taxa-entrega"></p>
+                <p id="preco-total"></p>
+            </div>
+        </div>
+        <div id="botoes-finalizacao">
+            <a href="index.html" class="botao_altera">Voltar ao Cardápio</a>
+            <a href="pagamento.html" class="botao_altera">Ir para o Pagamento</a>
+
+        </div>  
     </main>
 
     <script src="./js/class.js"></script>

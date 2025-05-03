@@ -147,3 +147,87 @@ nav a:hover {
     font-size: 24px;
     margin-bottom: 30px;
 }
+#formulario-entrega {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-size: 18px;
+}
+
+#formulario-entrega label {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#formulario-entrega input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#formulario-entrega button {
+    padding: 12px 20px;
+    margin-right: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#formulario-entrega button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+}
+
+#formulario-entrega button#voltar {
+    background-color: #ccc;
+    color: black;
+}
+#resumo-pedido {
+    display: none;
+    justify-content: space-between;
+    padding: 30px 20px;
+    font-size: 20px;
+    margin-top: 30px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    line-height: 1.8;
+}
+
+#dados-usuario, #detalhes-pedido {
+    width: 48%;
+}
+
+#detalhes-pedido {
+    text-align: right;
+}
+
+#detalhes-pedido p {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.botao_altera {
+    background-color: green;
+    color: white;
+    padding: 10px 20px;       /* menor que antes */
+    font-size: 16px;          /* menor que 20px */
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    width: 48%;               /* para caberem lado a lado */
+    text-align: center;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+.botao_altera:hover {
+    background-color: darkgreen;
+}
+
+
