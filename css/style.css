@@ -1,15 +1,21 @@
+.medievalsharp-regular {
+    font-family: "MedievalSharp", cursive;
+    font-weight: 400;
+    font-style: normal;
+  }
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body {
-    background-color: aliceblue;
+    background-image: url("https://wallpapers.com/images/hd/old-paper-texture-parchment-grodfr8ezxzzei6l.jpg")
 
 }
 
 
 #header {
+    font-family: "MedievalSharp";
     background-color: blueviolet;
     font-size: larger;
     padding: 0px 20px;
@@ -48,9 +54,13 @@ nav a:hover {
     color: white;
     width: 100%; 
 }
+main {
+    background-image: url("https://wallpapers.com/images/hd/old-paper-texture-parchment-grodfr8ezxzzei6l.jpg")
+}
 #legenda {
+    font-family: "MedievalSharp";
     text-align: center;
-    font-size: 25px
+    font-size: 40px
 }
 #produtosContainer {
     display: grid;
@@ -66,6 +76,7 @@ nav a:hover {
 }
 
 .card {
+    font-family: "MedievalSharp";
     display: flex;
     background-color: #fff;
     border-radius: 10px;
@@ -174,6 +185,8 @@ nav a:hover {
     color: black;
     text-align: left;
     margin-top: 20px;
+    font-family: "MedievalSharp";
+
 }
 #final a {
     color: white;

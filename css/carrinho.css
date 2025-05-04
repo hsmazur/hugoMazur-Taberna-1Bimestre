@@ -1,17 +1,22 @@
+.medievalsharp-regular {
+    font-family: "MedievalSharp", cursive;
+    font-weight: 400;
+    font-style: normal;
+}
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 body {
-    background-color: aliceblue;
-
+    background-image: url("https://wallpapers.com/images/hd/old-paper-texture-parchment-grodfr8ezxzzei6l.jpg")
 }
 
 
 #header {
     background-color: blueviolet;
     font-size: larger;
+    font-family: "MedievalSharp";
     padding: 0px 20px;
     display: flex;
     justify-content: space-between;
@@ -47,9 +52,13 @@ nav a:hover {
     color: white;
     width: 100%; 
 }
+main{
+    background-image: url("https://wallpapers.com/images/hd/old-paper-texture-parchment-grodfr8ezxzzei6l.jpg")
+}
 #legenda {
     text-align: center;
-    font-size: 25px
+    font-size: 40px;
+    font-family: "MedievalSharp";
 }
 #lista-carrinho {
     display: flex;
@@ -66,6 +75,7 @@ nav a:hover {
     overflow: hidden;
     align-items: center;
     padding: 10px;
+
 }
 
 .card img {
@@ -84,6 +94,8 @@ nav a:hover {
     margin: 10px 20px;
     border-radius: 10px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-family: "MedievalSharp";
+
 }
 
 .item-carrinho img {
@@ -123,7 +135,7 @@ nav a:hover {
 }
 
 .btn-entrega, .btn-retirada {
-    background-color: #28a745; /* Verde */
+    background-color: blueviolet;
     color: white;
     padding: 15px 30px;
     border: none;
@@ -135,7 +147,7 @@ nav a:hover {
 }
 
 .btn-entrega:hover, .btn-retirada:hover {
-    background-color: #218838; /* Verde mais escuro */
+    background-color: darkviolet
 }
 
 .btn-entrega:focus, .btn-retirada:focus {
@@ -181,7 +193,7 @@ nav a:hover {
 }
 
 #formulario-entrega button[type="submit"] {
-    background-color: #28a745;
+    background-color: blueviolet;
     color: white;
 }
 
@@ -199,6 +211,8 @@ nav a:hover {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     line-height: 1.8;
+    font-family: "MedievalSharp";
+
 }
 
 #dados-usuario, #detalhes-pedido {
@@ -210,24 +224,43 @@ nav a:hover {
 }
 
 #detalhes-pedido p {
-    font-weight: bold;
     margin-bottom: 10px;
 }
+#botoes-finalizacao {
+    display: flex;
+    justify-content: center;
+    margin: 20px 20px 0 20px;
+}
+
 .botao_altera {
     background-color: green;
     color: white;
-    padding: 10px 20px;       /* menor que antes */
-    font-size: 16px;          /* menor que 20px */
+    padding: 15px 30px;
+    font-size: 20px;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     text-decoration: none;
-    width: 48%;               /* para caberem lado a lado */
+    width: 100%;
+    max-width: 600px;
     text-align: center;
     transition: background-color 0.3s ease;
-    margin: 0 auto;
 }
+
 .botao_altera:hover {
     background-color: darkgreen;
+}
+#final {
+    background-color: blueviolet;
+    font-size: larger;
+    padding: 30px 10px;
+    color: black;
+    text-align: left;
+    margin-top: 20px;
+    font-family: "MedievalSharp";
+
+}
+#final a {
+    color: white;
 }
 
 

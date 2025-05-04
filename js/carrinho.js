@@ -106,13 +106,12 @@ function criarFormulario(tipo) {
         const dados = new FormData(form);
         const resultado = Object.fromEntries(dados.entries());
         console.log("Dados enviados:", resultado);
-        alert("Pedido confirmado! Obrigado.");
         
         // Armazenando dados do usuário
         const nome = resultado.nome;
         const telefone = resultado.telefone;
-        const endereco = resultado.endereco || "Não informado";
-        const bairro = resultado.bairro || "Não informado";
+        const endereco = resultado.endereco || "Não há necessidade";
+        const bairro = resultado.bairro || "Não há necessidade";
         
         // Armazenando dados da escolha (entrega ou retirada)
         const modoEntrega = tipo === "entrega" ? "Entrega" : "Retirada";
