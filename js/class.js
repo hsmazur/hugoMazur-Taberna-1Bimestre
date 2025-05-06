@@ -6,12 +6,3 @@ class Lanche {
         this.preco = preco;
     }
 }
-
-class Bebida {
-    constructor(imagem, nome, ml, preco) {
-        this.imagem = imagem;
-        this.nome = nome;
-        this.ml = ml;
-        this.preco = preco;
-    }
-}

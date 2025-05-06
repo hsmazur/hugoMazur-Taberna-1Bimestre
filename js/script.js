@@ -13,13 +13,6 @@ const produtos = [
     new Lanche("img/lanche12.png", "Burger do Necromante", "Pão escuro, hambúrguer duplo, cebola roxa em conserva, molho escuro de alho", 26.40)
 ];
 
-const bebidas = [
-    new Bebida("img/bebida1.png", "Hidromel do Rei", 500, 14.90),
-    new Bebida("img/bebida2.png", "Poção de Energia", 300, 9.50),
-    new Bebida("img/bebida3.png", "Cerveja Anã", 600, 12.00),
-    new Bebida("img/bebida4.png", "Água Sagrada", 350, 6.00),
-    new Bebida("img/bebida5.png", "Suco da Floresta", 400, 10.00),
-];
 
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 
@@ -31,7 +24,7 @@ function criarCard(item) {
     <img src="${item.imagem}" alt="${item.nome}">
     <div class="card-info">
         <h3>${item.nome}</h3>
-        <p>${item.ingredientes || item.ml + " ml"}</p>
+        <p>${item.ingredientes}</p>
         <div class="quantidade">
             <button class="btn-menos">-</button>
             <span class="contador">${carrinho[item.nome] || 0}</span>

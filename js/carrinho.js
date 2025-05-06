@@ -13,13 +13,6 @@ const produtos = [
     new Lanche("img/lanche12.png", "Burger do Necromante", "Pão escuro, hambúrguer duplo, cebola roxa em conserva, molho escuro de alho", 26.40),
 ];
 
-const bebidas = [
-    new Bebida("img/bebida1.png", "Hidromel do Rei", 500, 14.90),
-    new Bebida("img/bebida2.png", "Poção de Energia", 300, 9.50),
-    new Bebida("img/bebida3.png", "Cerveja Anã", 600, 12.00),
-    new Bebida("img/bebida4.png", "Água Sagrada", 350, 6.00),
-    new Bebida("img/bebida5.png", "Suco da Floresta", 400, 10.00),
-];
 
 const todosProdutos = [...produtos, ...bebidas];
 
@@ -49,17 +42,18 @@ Object.entries(carrinho).forEach(([nome, qtd]) => {
                 <button class="remover-item">Remover</button>
             `;
 
-            // Adiciona o evento de remover o item
             card.querySelector(".remover-item").addEventListener("click", () => {
-                delete carrinho[produto.nome];  // Remove do carrinho
-                localStorage.setItem("carrinho", JSON.stringify(carrinho));  // Atualiza no localStorage
-                location.reload();  // Atualiza a página para refletir a remoção
+                delete carrinho[produto.nome];
+                localStorage.setItem("carrinho", JSON.stringify(carrinho));
+                location.reload();
             });
 
             container.appendChild(card);
         }
     }
 });
+
+localStorage.setItem('valorTotal', total.toFixed(2));
 
 const entregaBtn = document.querySelector(".btn-entrega");
 const retiradaBtn = document.querySelector(".btn-retirada");
@@ -68,7 +62,7 @@ const opcoesEntrega = document.getElementById("opcoes-entrega");
 const botoesDiv = document.getElementById("botoes-finalizacao");
 
 function criarFormulario(tipo) {
-    formContainer.innerHTML = ""; // Limpa conteúdo anterior
+    formContainer.innerHTML = "";
     const form = document.createElement("form");
     form.id = "form-dados";
 
@@ -94,42 +88,34 @@ function criarFormulario(tipo) {
     formContainer.style.display = "block";
     opcoesEntrega.style.display = "none";
 
-    // Botão voltar
     document.getElementById("voltar").addEventListener("click", () => {
         formContainer.style.display = "none";
         opcoesEntrega.style.display = "flex";
     });
 
-    // Botão confirmar
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const dados = new FormData(form);
         const resultado = Object.fromEntries(dados.entries());
-        console.log("Dados enviados:", resultado);
-        
-        // Armazenando dados do usuário
+
         const nome = resultado.nome;
         const telefone = resultado.telefone;
         const endereco = resultado.endereco || "Não há necessidade";
         const bairro = resultado.bairro || "Não há necessidade";
-        
-        // Armazenando dados da escolha (entrega ou retirada)
+
         const modoEntrega = tipo === "entrega" ? "Entrega" : "Retirada";
         const taxaEntrega = tipo === "entrega" ? 3.50 : 0;
-        
-        // Calculando preço total
-        const precoItens = total; // Já calculado no seu código
+
+        const precoItens = total;
         const precoFinal = precoItens + taxaEntrega;
 
-        // Atualizando a página com os dados
         document.getElementById("nome-usuario").textContent = `Nome: ${nome}`;
         document.getElementById("telefone-usuario").textContent = `Telefone: ${telefone}`;
         document.getElementById("endereco-usuario").textContent = `Endereço: ${endereco}`;
         document.getElementById("bairro-usuario").textContent = `Bairro: ${bairro}`;
-        
-        // Exibindo os itens do pedido
+
         const itensPedidoDiv = document.getElementById("itens-pedido");
-        itensPedidoDiv.innerHTML = ""; // Limpa conteúdo anterior
+        itensPedidoDiv.innerHTML = "";
         Object.entries(carrinho).forEach(([nome, qtd]) => {
             if (qtd > 0) {
                 const produto = todosProdutos.find(item => item.nome === nome);
@@ -146,19 +132,22 @@ function criarFormulario(tipo) {
             }
         });
 
-        // Atualizando modo de entrega, taxa e preço total
         document.getElementById("modo-entrega").textContent = `Modo de entrega: ${modoEntrega}`;
         document.getElementById("taxa-entrega").textContent = `Taxa de entrega: R$ ${taxaEntrega.toFixed(2)}`;
         document.getElementById("preco-total").textContent = `Preço total: R$ ${precoFinal.toFixed(2)}`;
 
-        // Exibindo o resumo
         formContainer.style.display = "none";
         document.getElementById("resumo-pedido").style.display = "flex";
-        
-        // Move o resumo para o local correto, entre a lista e os botões
-        botoesDiv.style.marginTop = "30px"; // Dá espaço para o resumo
+        botoesDiv.style.marginTop = "30px";
+
+        localStorage.setItem("resumoPedido", JSON.stringify({
+            precoTotal: precoFinal,
+            modoEntrega: modoEntrega
+        }));
     });
 }
 
 entregaBtn.addEventListener("click", () => criarFormulario("entrega"));
 retiradaBtn.addEventListener("click", () => criarFormulario("retirada"));
+
+
