@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dinheiro: criarFormularioDinheiro(),
         pix: criarFormularioPix(),
         debito: criarFormularioDebito(),
-        local: criarFormularioLocal()
     };
 
     const container = document.getElementById('opcoes-pagamento');
@@ -145,14 +144,3 @@ function criarFormularioDebito() {
     return div;
 }
 
-function criarFormularioLocal() {
-    const div = document.createElement('div');
-    div.classList.add('formulario');
-
-    const aviso = document.createElement('p');
-    aviso.textContent = 'O pagamento será feito presencialmente no balcão da Taberna.';
-
-    div.appendChild(aviso);
-    div.appendChild(criarBotaoVoltarConfirmar());
-    return div;
-}
