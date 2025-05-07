@@ -14,7 +14,7 @@ const produtos = [
 ];
 
 
-const todosProdutos = [...produtos, ...bebidas];
+const todosProdutos = [...produtos,];
 
 const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 const container = document.getElementById("lista-carrinho");
