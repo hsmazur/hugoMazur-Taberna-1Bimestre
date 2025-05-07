@@ -1,3 +1,4 @@
+// Array de produtos disponíveis no cardápio
 const produtos = [
     new Lanche("img/lanche1.png", "Burger do Camponês", "Pão rústico, hambúrguer bovino, queijo curado", 21.90),
     new Lanche("img/lanche2.png", "Burger do Cavaleiro", "Pão, hambúrguer duplo, bacon defumado, queijo cheddar", 28.50),
@@ -13,60 +14,74 @@ const produtos = [
     new Lanche("img/lanche12.png", "Burger do Necromante", "Pão escuro, hambúrguer duplo, cebola roxa em conserva, molho escuro de alho", 26.40)
 ];
 
-
+// Carrinho de compras inicializado com os itens salvos no localStorage ou vazio
 let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 
+/**
+ * Cria um card de produto para exibição na página
+ * @param {Object} item - Objeto contendo os dados do produto
+ * @returns {HTMLElement} Elemento HTML do card criado
+ */
 function criarCard(item) {
     const card = document.createElement("div");
     card.className = "card";
 
     card.innerHTML = `
-    <img src="${item.imagem}" alt="${item.nome}">
-    <div class="card-info">
-        <h3>${item.nome}</h3>
-        <p>${item.ingredientes}</p>
-        <div class="quantidade">
-            <button class="btn-menos">-</button>
-            <span class="contador">${carrinho[item.nome] || 0}</span>
-            <button class="btn-mais">+</button>
+        <img src="${item.imagem}" alt="${item.nome}">
+        <div class="card-info">
+            <h3>${item.nome}</h3>
+            <p>${item.ingredientes}</p>
+            <div class="quantidade">
+                <button class="btn-menos" onclick="atualizarQuantidade('${item.nome}', -1)">-</button>
+                <span class="contador">${carrinho[item.nome] || 0}</span>
+                <button class="btn-mais" onclick="atualizarQuantidade('${item.nome}', 1)">+</button>
+            </div>
         </div>
-    </div>
-    <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
-`;
-
-    const btnMais = card.querySelector(".btn-mais");
-    const btnMenos = card.querySelector(".btn-menos");
-    const contador = card.querySelector(".contador");
-
-    btnMais.addEventListener("click", () => {
-        carrinho[item.nome] = (carrinho[item.nome] || 0) + 1;
-        contador.textContent = carrinho[item.nome];
-        localStorage.setItem("carrinho", JSON.stringify(carrinho));
-    });
-
-    btnMenos.addEventListener("click", () => {
-        if (carrinho[item.nome] > 0) {
-            carrinho[item.nome]--;
-            contador.textContent = carrinho[item.nome];
-            localStorage.setItem("carrinho", JSON.stringify(carrinho));
-        }
-    });
+        <div class="card-preco">R$ ${item.preco.toFixed(2)}</div>
+    `;
 
     return card;
 }
 
+/**
+ * Atualiza a quantidade de um item no carrinho
+ * @param {string} nomeProduto - Nome do produto a ser atualizado
+ * @param {number} alteracao - Valor a ser adicionado/subtraído (+1 ou -1)
+ */
+function atualizarQuantidade(nomeProduto, alteracao) {
+    const novoValor = (carrinho[nomeProduto] || 0) + alteracao;
+    
+    // Garante que a quantidade não seja negativa
+    if (novoValor >= 0) {
+        carrinho[nomeProduto] = novoValor;
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+        
+        // Atualiza o contador na interface
+        const contadores = document.querySelectorAll(`.contador`);
+        contadores.forEach(contador => {
+            if (contador.closest('.card').querySelector('h3').textContent === nomeProduto) {
+                contador.textContent = novoValor;
+            }
+        });
+    }
+}
+
+/**
+ * Exibe a lista de produtos no container especificado
+ * @param {Array} lista - Lista de produtos a serem exibidos
+ * @param {string} containerId - ID do elemento HTML onde os produtos serão renderizados
+ */
 function exibirProdutos(lista, containerId) {
     const container = document.getElementById(containerId);
     container.innerHTML = "";
+    
     lista.forEach(item => {
-        const card = criarCard(item);
-        container.appendChild(card);
+        container.appendChild(criarCard(item));
     });
 }
 
-
-window.onload = () => {
+// Quando a página carrega, exibe os produtos e cria o botão do carrinho
+window.onload = function() {
     exibirProdutos(produtos, "produtosContainer");
-    exibirProdutos(bebidas, "bebidasContainer");
     criarBotaoCarrinho();
 };
